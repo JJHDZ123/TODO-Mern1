@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import classes from './AuthForm.module.scss';
 
 function Login() {
+	const navigate = useNavigate();
 	const login = async (e) => {
 		e.preventDefault();
 		const email = e.target.email.value;
@@ -14,9 +16,11 @@ function Login() {
 				email,
 				password
 			});
-			Navigate('/');
+			navigate('/');
+			toast.success('Login successful!');
 		} catch (err) {
 			console.log(err);
+			toast.error('Login failed!');
 		}
 	};
 
